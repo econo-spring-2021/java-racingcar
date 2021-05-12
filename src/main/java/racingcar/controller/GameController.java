@@ -1,39 +1,37 @@
 package racingcar.controller;
 
+import racingcar.domain.Game;
 import racingcar.view.GameIO;
 
 import java.util.Scanner;
 
-public class Game {
-    private String[] carName;
-    private int tryCount;
+public class GameController {
+    Scanner scanner;
+    Game game;
+    GameIO io;
 
     public void start() {
-        Scanner scanner = new Scanner(System.in);
-        GameIO io = new GameIO();
+        scanner = new Scanner(System.in);
+        game = new Game();
+        io = new GameIO();
 
-        inputGameData(scanner, io);
-
+        inputGameData();
     }
 
-    private void inputGameData(Scanner scanner, GameIO io) {
+    private void inputGameData() {
         try {
             io.askCarName();
             String[] inputCarName = io.inputCarNameArr(scanner);
             io.catchNameException(inputCarName);
-            carName = inputCarName;
+            game.setCarName(inputCarName);
 
             io.askTryCount();
             String inputTryCount = io.inputTryCount(scanner);
             io.catchTryCountException(inputTryCount);
-            tryCount = Integer.parseInt(inputTryCount);
-
-            for (String s : carName) System.out.println(s + " ");
-            System.out.println(tryCount);
-
+            game.setTryCount(Integer.parseInt(inputTryCount));
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            inputGameData(scanner, io);
+            inputGameData();
         }
     }
 }
