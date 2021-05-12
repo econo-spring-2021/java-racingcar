@@ -34,8 +34,8 @@ public class GameIO {
         if (name.length() > 5) throw new TooLongNameException();
     }
 
-    public void catchTryCountException(String cnt) throws NotProperInputTypeException {
-        boolean isDigit =  cnt.matches("[+-]?\\d*(\\.\\d+)?");
+    public void catchTryCountException(String count) throws NotProperInputTypeException {
+        boolean isDigit =  count.matches("[+-]?\\d*(\\.\\d+)?");
         if (!isDigit) throw new NotProperInputTypeException();
 
     }
