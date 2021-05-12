@@ -8,5 +8,12 @@ public class Car {
         this.name = name;
     }
 
-    // 추가 기능 구현
+    public void raceOnce() {
+        int moveChance = (int)(Math.random() * 10);
+        if (moveChance >= 4) move();
+    }
+
+    private void move() {
+        position++;
+    }
 }
