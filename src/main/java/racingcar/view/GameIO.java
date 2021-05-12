@@ -15,7 +15,28 @@ public class GameIO {
         return scanner.nextLine().replaceAll(" ", "").split(",");
     }
 
-    public int inputTryCount(Scanner scanner) {
-        return scanner.nextInt();
+    public String inputTryCount(Scanner scanner) {
+        return scanner.nextLine().replaceAll(" ", "");
+    }
+
+    public void catchNameException(String[] name) throws EmptyNameException, TooLongNameException {
+        for (String n : name) {
+            catchEmptyName(n);
+            catchTooLongName(n);
+        }
+    }
+
+    public void catchEmptyName(String name) throws EmptyNameException {
+        if (name == "") throw new EmptyNameException();
+    }
+
+    public void catchTooLongName(String name) throws TooLongNameException {
+        if (name.length() > 5) throw new TooLongNameException();
+    }
+
+    public void catchTryCountException(String cnt) throws NotProperInputTypeException {
+        boolean isDigit =  cnt.matches("[+-]?\\d*(\\.\\d+)?");
+        if (!isDigit) throw new NotProperInputTypeException();
+
     }
 }
