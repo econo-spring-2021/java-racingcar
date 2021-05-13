@@ -44,9 +44,7 @@ public class Cars {
     public List<String> getCarNamesPositionAt(int position) {
         return cars.stream()
                 .filter(t -> t.getPosition() == position)
-                .map((car) -> {
-                    return car.getCarName();
-                })
+                .map((car) -> car.getCarName())
                 .collect(Collectors.toList());
     }
 }
