@@ -8,8 +8,16 @@ public class Car {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
     public void raceOnce() {
-        int moveChance = (int)(Math.random() * 10);
+        int moveChance = (int) (Math.random() * 10);
         if (moveChance >= 4) move();
     }
 

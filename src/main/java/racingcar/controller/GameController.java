@@ -18,6 +18,7 @@ public class GameController {
 
         inputGameData();
         generateCar(game.getCarName());
+        simulateRace();
     }
 
     private void inputGameData() {
@@ -44,5 +45,19 @@ public class GameController {
             car[i] = generatedCar;
         }
         game.setCar(car);
+    }
+
+    private void simulateRace() {
+        io.printStartingRace();
+        for (int i = 0; i < game.getTryCount(); i++) {
+            raceAllCarOnce();
+            io.printRaceResult(game.getCar());
+        }
+    }
+
+    private void raceAllCarOnce() {
+        for (Car car : game.getCar()) {
+            car.raceOnce();
+        }
     }
 }
