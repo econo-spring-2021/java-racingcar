@@ -76,7 +76,10 @@ public class Game {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String carNameInput = br.readLine();
         String[] carNames = getCarNames(carNameInput);
-        checkCarNameInput(carNames.length);
+        while (!checkCarNameInput(carNames)) {
+            InputView.checkCarNameInputView();
+            carNames = getCarNames(br.readLine());
+        }
         return carNames;
     }
 
@@ -85,11 +88,13 @@ public class Game {
         return carNames;
     }
 
-    public static void checkCarNameInput(int number) throws IOException {
-        if (number > 5) {
-            InputView.checkCarNameInputView();
-            carNameInput();
+    public static boolean checkCarNameInput(String[] carNames) throws IOException {
+        for(int i=0;i<carNames.length;i++){
+            if(carNames[i].length() > 5){
+                return false;
+            }
         }
+        return true;
     }
 
     public static int tryNumberInput() throws IOException {
