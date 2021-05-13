@@ -17,6 +17,26 @@ public class Game {
         return tryCount;
     }
 
+    public String[] getWinner() {
+        String[] winner = new String[car.length];
+        int maxPosition = getMaxPosition();
+
+        for (int i = 0; i < car.length; i++) {
+            winner[i] = car[i].getNameIfPositionSameOrEmpty(maxPosition);
+        }
+
+        return winner;
+    }
+
+    private int getMaxPosition() {
+        int max = 0;
+        for (Car c : car) {
+            max = c.getPositionIfBiggerOrComp(max);
+        }
+
+        return max;
+    }
+
     public void setCar(Car[] _car) {
         car = _car;
     }

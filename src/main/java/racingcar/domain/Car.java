@@ -12,8 +12,20 @@ public class Car {
         return name;
     }
 
+    public String getNameIfPositionSameOrEmpty(int comp) {
+        if (position == comp) return name;
+
+        return "";
+    }
+
     public int getPosition() {
         return position;
+    }
+
+    public int getPositionIfBiggerOrComp(int comp) {
+        if (position > comp) return position;
+
+        return comp;
     }
 
     public void raceOnce() {

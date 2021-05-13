@@ -53,6 +53,8 @@ public class GameController {
             raceAllCarOnce();
             io.printRaceResult(game.getCar());
         }
+
+        io.printWinner(game.getWinner());
     }
 
     private void raceAllCarOnce() {

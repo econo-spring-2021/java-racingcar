@@ -33,6 +33,24 @@ public class GameIO {
         System.out.println();
     }
 
+    public void printWinner(String[] winner) {
+        printNameList(winner);
+        System.out.println("가 최종 우승했습니다.");
+    }
+
+    private void printNameList(String[] name) {
+        for (int i = 0; i < name.length; i++) {
+            printNameSpot(name[i], i);
+            System.out.print(name[i]);
+        }
+    }
+
+    private void printNameSpot(String name, int idx) {
+        if (idx == 0 || name.equals("")) return;
+
+        System.out.print(".");
+    }
+
     public String[] inputCarNameArr(Scanner scanner) {
         return scanner.nextLine().replaceAll(" ", "").split(",");
     }
