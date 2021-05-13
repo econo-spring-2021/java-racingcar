@@ -10,16 +10,18 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Game {
+    private static int max = 0;
+    private static ArrayList<Car> cars;
+    private static String[] carNames;
 
     public static void main(String[] args) throws IOException {
         InputView.carNameInputView();
-        String[] carNames = carNameInput();
-        ArrayList<Car> cars = new ArrayList<>();
+        carNames = carNameInput();
+        cars = new ArrayList<>();
         for (int i = 0; i < carNames.length; i++) {
             cars.add(new Car(carNames[i]));
         }
         int tryNumber = tryNumberInput();
-
         StringBuilder[] racingCars = new StringBuilder[cars.size()];
         racingCarsInit(racingCars);
 
@@ -29,6 +31,29 @@ public class Game {
                 racingCars[j] = racingCarMove(cars.get(j).move(), racingCars[j]);
             }
             OutputView.raceResultView(carNames, racingCars);
+        }
+        ArrayList<String> winners = getWinner();
+        OutputView.winnersView(winners);
+    }
+
+    public static ArrayList<String> getWinner() {
+        getMaxPosition();
+        ArrayList<String> winners = new ArrayList<>();
+        for (int i = 0; i < cars.size(); i++) {
+            if (cars.get(i).getPosition() == max) {
+                winners.add(carNames[i]);
+            }
+        }
+        return winners;
+    }
+
+    public static void getMaxPosition() {
+        int position;
+        for (int i = 0; i < cars.size(); i++) {
+            position = cars.get(i).getPosition();
+            if (max < position) {
+                max = position;
+            }
         }
     }
 
