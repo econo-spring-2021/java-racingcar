@@ -96,14 +96,17 @@ public class Game {
         InputView.tryNumberInputView();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int tryNumber = Integer.parseInt(br.readLine());
-        checkTryNumberInput(tryNumber);
+        while (checkTryNumberInput(tryNumber)) {
+            InputView.checkTryNumberInputView();
+            tryNumber = Integer.parseInt(br.readLine());
+        }
         return tryNumber;
     }
 
-    public static void checkTryNumberInput(int tryNumber) throws IOException {
+    public static boolean checkTryNumberInput(int tryNumber) throws IOException {
         if (tryNumber <= 0) {
-            InputView.checkTryNumberInputView();
-            tryNumberInput();
+            return true;
         }
+        return false;
     }
 }
