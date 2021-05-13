@@ -1,18 +1,21 @@
 package racingcar.controller;
 
+import racingcar.domain.Car;
 import racingcar.view.InputView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Game {
 
     public static void main(String[] args) throws IOException {
         InputView.carNameInputView();
         String[] carNames = carNameInput();
+        ArrayList<Car> cars = new ArrayList<>();
         for(int i=0;i<carNames.length;i++){
-            System.out.println(carNames[i]);
+            cars.add(new Car(carNames[i]));
         }
     }
 
