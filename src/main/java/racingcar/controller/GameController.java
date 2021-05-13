@@ -28,7 +28,7 @@ public class GameController {
             game = new RacingGame(checkValidation(carNames), trialTime);
 
             outputView.showGameStartMsg();
-            while (game.IS_PLAYING) {
+            while (game.isPlaying()) {
                 game.startRound();
                 outputView.showGameProcess(game.getCarPositions());
             }

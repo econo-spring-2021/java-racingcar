@@ -7,10 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 class RacingGame {
-    public boolean IS_PLAYING;
-
     private final static int MOVE_BOUND = 10;
     private int MAX_TRIAL;
+    private boolean IS_PLAYING;
 
     private Cars racingCars;
     private int trialTime;
@@ -23,6 +22,10 @@ class RacingGame {
         }
         MAX_TRIAL = maxTrial;
         IS_PLAYING = true;
+    }
+
+    public boolean isPlaying() {
+        return this.IS_PLAYING;
     }
 
     public void startRound() {
