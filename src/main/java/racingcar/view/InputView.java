@@ -17,4 +17,5 @@ public class InputView {
         System.out.println(INPUT_COUNT_MESSAGE);
         return input.nextInt();
     }
+
 }

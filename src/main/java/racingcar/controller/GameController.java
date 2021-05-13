@@ -4,68 +4,104 @@ import racingcar.domain.Car;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.StringTokenizer;
-
+import java.util.*;
 
 public class GameController {
-    private final int MAX_NAME_LENGTH = 5;
+    private static final int MAX_NAME_LENGTH = 5;
+    private static final int MINIMUM_INCLUDE_CAR = 2;
     private static final int PROCESS_CRITERIA = 4;
-    private final String NAME_SEPARATOR=",";
-    private ArrayList<Car> arCar = new ArrayList<>();
-    private String names;
-    private int tryCount;
+    private static final String NAME_SEPARATOR = ",";
+
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();
+    private ArrayList<Car> arCar = new ArrayList<>();
 
-
-    public void gameStart(){
-        separateName();
-        tryCount = inputView.inputGameCount();
-        outputView.showPlayingStart();
-        totalPlayGame();
+    public ArrayList<Car> getArCar() {
+        return arCar;
     }
 
-    public void separateName() {
-        names = inputView.inputNames();
-        StringTokenizer st = new StringTokenizer(names, NAME_SEPARATOR);
-        String part;
+    public void gameStart() {
+        String carConnects;
+        String[] carNames;
         do {
-            part = st.nextToken();
-            arCar.add(new Car(part));
-        } while (st.hasMoreTokens() && checkNameLength(part));
+            carConnects = inputView.inputNames();
+            carNames = separateName(carConnects);
+        } while (checkNameLength(carNames).contains(false) || !checkIncludeCarNum(carNames));
+
+        for (String s : carNames) {
+            arCar.add(new Car(s));
+        }
+        totalPlayGame();
+        outputView.showWinner(decideWinner());
     }
 
-    public boolean checkNameLength(String s) {
+    public String[] separateName(String names) {
+        return names.split(NAME_SEPARATOR);
+    }
+
+    public ArrayList<Boolean> checkNameLength(String[] carNames) {
+        ArrayList<Boolean> carsContainFalse = new ArrayList<>(carNames.length);
+        for (String s : carNames) {
+            carsContainFalse.add(InningFiveLength(s));
+        }
+        return carsContainFalse;
+    }
+
+    public boolean InningFiveLength(String carName) {
+        boolean result = true;
+        if (carName.length() > MAX_NAME_LENGTH) {
+            result = false;
+        }
+        return result;
+
+    }
+
+    public boolean checkIncludeCarNum(String[] carNames) {
         boolean answer = false;
-        if (s.length() <= MAX_NAME_LENGTH) {
+        if (carNames.length >= MINIMUM_INCLUDE_CAR) {
             answer = true;
         }
         return answer;
     }
 
-    public int randomValueGive(){
-        return (int)(Math.random()*10000)%10;
+    public int randomValueGive() {
+        return (int) (Math.random() * 10000) % 10;
     }
 
-    public void goOrStop(Car c){
-        if(randomValueGive() > PROCESS_CRITERIA){
+    public void goOrStop(Car c) {
+        if (randomValueGive() >= PROCESS_CRITERIA) {
             c.progress();
         }
     }
 
-    public void oneTimeplayGame(){
-        for (Car c : arCar){
+    public void oneTimeplayGame() {
+        for (Car c : arCar) {
             goOrStop(c);
             outputView.showPlayingResult(c);
         }
     }
 
-    public void totalPlayGame(){
-        for (int i=0; i<tryCount; i++){
+    public void totalPlayGame() {
+        int tryCount = inputView.inputGameCount();
+        outputView.showPlayingStart();
+        for (int i = 0; i < tryCount; i++) {
             oneTimeplayGame();
             System.out.println();
         }
     }
 
+    public ArrayList<Car> decideWinner(){
+        int max =Integer.MIN_VALUE;
+        ArrayList<Car> winnerCars = new ArrayList<>();
+        for(Car c : arCar){
+            if(max < c.getPosition()){
+                max=c.getPosition();
+            }
+        }
+        for(Car c : arCar){
+            if(c.getPosition() == max)
+                winnerCars.add(c);
+        }
+        return winnerCars;
+    };
 }
