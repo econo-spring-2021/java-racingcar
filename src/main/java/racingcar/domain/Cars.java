@@ -2,10 +2,8 @@ package racingcar.domain;
 
 import Util.RandomNumGenerator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Cars {
     private List<Car> cars;
@@ -23,16 +21,32 @@ public class Cars {
     }
 
     public void moveRandomAll(int bound) {
-        for (Car car: cars) {
+        for (Car car : cars) {
             car.move(RandomNumGenerator.randInt(bound));
         }
     }
 
     public Map<String, Integer> getCarPositions() {
         HashMap<String, Integer> carPositions = new HashMap<>();
-        for (Car car: cars) {
+        for (Car car : cars) {
             carPositions.put(car.getCarName(), car.getPosition());
         }
         return carPositions;
+    }
+
+    public int getTopPosition() {
+        return cars.stream()
+                .max(Car::compareTo)
+                .get()
+                .getPosition();
+    }
+
+    public List<String> getCarNamesPositionAt(int position) {
+        return cars.stream()
+                .filter(t -> t.getPosition() == position)
+                .map((car) -> {
+                    return car.getCarName();
+                })
+                .collect(Collectors.toList());
     }
 }

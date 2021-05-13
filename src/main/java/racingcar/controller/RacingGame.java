@@ -18,7 +18,7 @@ class RacingGame {
     public RacingGame(List<String> carNames, int maxTrial) {
         trialTime = 0;
         this.racingCars = new Cars();
-        for (String carName: carNames) {
+        for (String carName : carNames) {
             racingCars.add(new Car(carName));
         }
         MAX_TRIAL = maxTrial;
@@ -34,5 +34,10 @@ class RacingGame {
 
     public Map<String, Integer> getCarPositions() {
         return racingCars.getCarPositions();
+    }
+
+    public List<String> getWinnerNames() {
+        int winPosition = racingCars.getTopPosition();
+        return racingCars.getCarNamesPositionAt(winPosition);
     }
 }
