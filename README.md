@@ -2,12 +2,13 @@
 자동차 경주 미션을 진행하는 저장소
 
 ### 구현할 기능
-* [ ] InputView
+* [X] InputView
     * [ ] 입력 예외 처리
 * [ ] OutputView
-* [ ] RandomNumGenerator
+* [ ] 랜덤으로 숫자 생성 Util 클래스
+* [ ] 구분자 기준 데이터 파싱 Util 클래스
 * [ ] Car
 * [ ] Cars
-* [ ] RacingGame
+* [ ] RacingGame (controller)
 * [ ] Application
-* [ ] Message
+* [ ] 입출력에 사용되는 문자열 상수를 담고 있는 클래스

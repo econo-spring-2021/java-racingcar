@@ -11,13 +11,13 @@ public class InputView {
         scanner = new Scanner(System.in);
     }
 
-    public String inputCarNames() {
-        System.out.println(Message.ASK_CAR_NAMES);
+    public String inputCarNames(String delimiter) {
+        System.out.println(String.format(Message.ASK_CAR_NAMES, delimiter));
         return scanner.nextLine();
     }
 
-    public String inputTrialTime() {
+    public int inputTrialTime() {
         System.out.println(Message.ASK_TRIAL_TIME);
-        return scanner.nextLine();
+        return Integer.parseInt(scanner.nextLine());
     }
 }
