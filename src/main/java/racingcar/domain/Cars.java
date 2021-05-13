@@ -27,7 +27,7 @@ public class Cars {
     }
 
     public Map<String, Integer> getCarPositions() {
-        HashMap<String, Integer> carPositions = new HashMap<>();
+        Map<String, Integer> carPositions = new HashMap<>();
         for (Car car : cars) {
             carPositions.put(car.getCarName(), car.getPosition());
         }

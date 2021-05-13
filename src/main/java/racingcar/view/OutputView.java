@@ -10,6 +10,7 @@ public class OutputView {
     public void showGameStartMsg() {
         System.out.println('\n' + Message.GAME_START);
     }
+
     public void showGameProcess(Map<String, Integer> carPositions) {
         carPositions.forEach((carName, carPosition) -> {
             StringBuilder builder = new StringBuilder();
