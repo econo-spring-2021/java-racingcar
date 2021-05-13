@@ -28,7 +28,7 @@ public class Game {
         return winner;
     }
 
-    private int getMaxPosition() {
+    public int getMaxPosition() {
         int max = 0;
         for (Car c : car) {
             max = c.getPositionIfBiggerOrComp(max);
