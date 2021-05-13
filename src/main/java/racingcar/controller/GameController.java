@@ -20,6 +20,13 @@ public class GameController {
     public void play() {
         String carNames = inputView.inputCarNames(CAR_NAME_DELIMITER);
         int trialTime = inputView.inputTrialTime();
+
         game = new RacingGame(Parser.parse(carNames, CAR_NAME_DELIMITER), trialTime);
+
+        while (game.IS_PLAYING) {
+            game.startRound();
+            outputView.showGameProcess(game.getCarPositions());
+        }
+
     }
 }

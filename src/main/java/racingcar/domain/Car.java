@@ -17,7 +17,7 @@ public class Car implements Comparable<Car> {
     }
 
     public void move(int step) {
-        if (step >= 4) position += step;
+        if (step >= 4) position += 1;
     }
 
     @Override
