@@ -17,6 +17,7 @@ public class Game {
         for(int i=0;i<carNames.length;i++){
             cars.add(new Car(carNames[i]));
         }
+        int tryNumber = tryNumberInput();
     }
 
     public static String[] carNameInput() throws IOException {
@@ -34,8 +35,23 @@ public class Game {
 
     public static void checkCarNameInput(int number) throws IOException {
         if(number > 5){
-            InputView.checkInput();
+            InputView.checkCarNameInputView();
             carNameInput();
+        }
+    }
+
+    public static int tryNumberInput() throws IOException {
+        InputView.tryNumberInputView();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tryNumber = Integer.parseInt(br.readLine());
+        checkTryNumberInput(tryNumber);
+        return tryNumber;
+    }
+
+    public static void checkTryNumberInput(int tryNumber) throws IOException {
+        if(tryNumber <=0){
+            InputView.checkTryNumberInputView();
+            tryNumberInput();
         }
     }
 }
