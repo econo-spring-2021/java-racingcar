@@ -8,17 +8,17 @@ public class Car {
         this.name = name;
     }
 
-    public boolean move(){
+    public boolean move() {
         int randomValue = setRandomValue();
-        if(randomValue >= 4){
+        if (randomValue >= 4) {
             position++;
             return true;
         }
         return false;
     }
 
-    public int setRandomValue(){
-        return (int)((Math.random()*10000)%10);
+    public int setRandomValue() {
+        return (int) ((Math.random() * 10000) % 10);
     }
 
     public int getPosition() {

@@ -14,11 +14,11 @@ public class OutputView {
         System.out.println("");
     }
 
-    public static void winnersView(ArrayList<String> winners){
+    public static void winnersView(ArrayList<String> winners) {
         StringBuilder view = new StringBuilder();
         view.append(winners.get(0));
-        for(int i=1;i<winners.size();i++){
-                view.append(", ").append(winners.get(i));
+        for (int i = 1; i < winners.size(); i++) {
+            view.append(", ").append(winners.get(i));
         }
         view.append("가 최종 우승했습니다.");
         System.out.println(view.toString());
