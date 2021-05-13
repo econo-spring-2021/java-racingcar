@@ -1,5 +1,6 @@
 package racingcar.controller;
 
+import racingcar.domain.Car;
 import racingcar.domain.Game;
 import racingcar.view.GameIO;
 
@@ -16,6 +17,7 @@ public class GameController {
         io = new GameIO();
 
         inputGameData();
+        generateCar(game.getCarName());
     }
 
     private void inputGameData() {
@@ -33,5 +35,14 @@ public class GameController {
             System.out.println(e.getMessage());
             inputGameData();
         }
+    }
+
+    private void generateCar(String[] carName) {
+        Car[] car = new Car[carName.length];
+        for (int i = 0; i < car.length; i++) {
+            Car generatedCar = new Car(carName[i]);
+            car[i] = generatedCar;
+        }
+        game.setCar(car);
     }
 }
