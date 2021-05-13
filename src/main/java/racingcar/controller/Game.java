@@ -2,6 +2,7 @@ package racingcar.controller;
 
 import racingcar.domain.Car;
 import racingcar.view.InputView;
+import racingcar.view.OutputView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class Game {
         InputView.carNameInputView();
         String[] carNames = carNameInput();
         ArrayList<Car> cars = new ArrayList<>();
-        for(int i=0;i<carNames.length;i++){
+        for (int i = 0; i < carNames.length; i++) {
             cars.add(new Car(carNames[i]));
         }
         int tryNumber = tryNumberInput();
@@ -22,22 +23,24 @@ public class Game {
         StringBuilder[] racingCars = new StringBuilder[cars.size()];
         racingCarsInit(racingCars);
 
-        for(int i=0;i< tryNumber;i++){
-            for(int j=0; j<cars.size();j++){
+        OutputView.raceStartView();
+        for (int i = 0; i < tryNumber; i++) {
+            for (int j = 0; j < cars.size(); j++) {
                 racingCars[j] = racingCarMove(cars.get(j).move(), racingCars[j]);
             }
+            OutputView.raceResultView(carNames, racingCars);
         }
     }
 
-    public static StringBuilder[] racingCarsInit(StringBuilder[] racingCars){
-        for(int i=0;i<racingCars.length;i++){
+    public static StringBuilder[] racingCarsInit(StringBuilder[] racingCars) {
+        for (int i = 0; i < racingCars.length; i++) {
             racingCars[i] = new StringBuilder("");
         }
         return racingCars;
     }
 
-    public static StringBuilder racingCarMove(boolean isMoving, StringBuilder racingCar){
-        if(isMoving){
+    public static StringBuilder racingCarMove(boolean isMoving, StringBuilder racingCar) {
+        if (isMoving) {
             racingCar.append("-");
             return racingCar;
         }
@@ -52,13 +55,13 @@ public class Game {
         return carNames;
     }
 
-    public static String[] getCarNames(String carNameInput){
+    public static String[] getCarNames(String carNameInput) {
         String[] carNames = carNameInput.split(",");
         return carNames;
     }
 
     public static void checkCarNameInput(int number) throws IOException {
-        if(number > 5){
+        if (number > 5) {
             InputView.checkCarNameInputView();
             carNameInput();
         }
@@ -73,7 +76,7 @@ public class Game {
     }
 
     public static void checkTryNumberInput(int tryNumber) throws IOException {
-        if(tryNumber <=0){
+        if (tryNumber <= 0) {
             InputView.checkTryNumberInputView();
             tryNumberInput();
         }
