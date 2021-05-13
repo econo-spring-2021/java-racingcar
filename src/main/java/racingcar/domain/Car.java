@@ -8,5 +8,17 @@ public class Car {
         this.name = name;
     }
 
-    // 추가 기능 구현
+    public boolean move(){
+        int randomValue = setRandomValue();
+        if(randomValue >= 4){
+            position++;
+            return true;
+        }
+        return false;
+    }
+
+    public int setRandomValue(){
+        return (int)((Math.random()*10000)%10);
+    }
+
 }
