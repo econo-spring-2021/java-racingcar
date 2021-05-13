@@ -18,6 +18,30 @@ public class Game {
             cars.add(new Car(carNames[i]));
         }
         int tryNumber = tryNumberInput();
+
+        StringBuilder[] racingCars = new StringBuilder[cars.size()];
+        racingCarsInit(racingCars);
+
+        for(int i=0;i< tryNumber;i++){
+            for(int j=0; j<cars.size();j++){
+                racingCars[j] = racingCarMove(cars.get(j).move(), racingCars[j]);
+            }
+        }
+    }
+
+    public static StringBuilder[] racingCarsInit(StringBuilder[] racingCars){
+        for(int i=0;i<racingCars.length;i++){
+            racingCars[i] = new StringBuilder("");
+        }
+        return racingCars;
+    }
+
+    public static StringBuilder racingCarMove(boolean isMoving, StringBuilder racingCar){
+        if(isMoving){
+            racingCar.append("-");
+            return racingCar;
+        }
+        return racingCar;
     }
 
     public static String[] carNameInput() throws IOException {

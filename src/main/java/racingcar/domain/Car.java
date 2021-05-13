@@ -21,4 +21,7 @@ public class Car {
         return (int)((Math.random()*10000)%10);
     }
 
+    public int getPosition() {
+        return position;
+    }
 }
