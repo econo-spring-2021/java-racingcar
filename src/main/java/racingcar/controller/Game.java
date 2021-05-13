@@ -101,7 +101,7 @@ public class Game {
         InputView.tryNumberInputView();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int tryNumber = Integer.parseInt(br.readLine());
-        while (checkTryNumberInput(tryNumber)) {
+        while (!checkTryNumberInput(tryNumber)) {
             InputView.checkTryNumberInputView();
             tryNumber = Integer.parseInt(br.readLine());
         }
@@ -110,8 +110,8 @@ public class Game {
 
     public static boolean checkTryNumberInput(int tryNumber) throws IOException {
         if (tryNumber <= 0) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 }
