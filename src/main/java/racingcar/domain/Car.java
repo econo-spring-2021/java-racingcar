@@ -1,6 +1,9 @@
 package racingcar.domain;
 
+import racingcar.controller.NumberGenerator;
+
 public class Car {
+    private final static int MOVE_CHANCE = 4;
     private final String name;
     private int position = 0;
 
@@ -27,15 +30,9 @@ public class Car {
         return position;
     }
 
-    public int getPositionIfBiggerOrComp(int comp) {
-        if (position > comp) return position;
-
-        return comp;
-    }
-
-    public void raceOnce() {
-        int moveChance = (int) (Math.random() * 10);
-        if (moveChance >= 4) move();
+    public void raceOnce(NumberGenerator numberGenerator) {
+        int moveChance = numberGenerator.generateNumber();
+        if (moveChance >= MOVE_CHANCE) move();
     }
 
     private void move() {

@@ -2,11 +2,16 @@ package racingcar.view;
 
 import racingcar.domain.Car;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class GameIO {
+    private final static int LONGNAME_STANDARD = 5;
 
-    public void askCarName() {
+    private Scanner scanner = new Scanner(System.in);
+
+    public void askCarNames() {
         System.out.println("경주할 자동차 이름을 입력하세요. (이름은 쉼표(,) 기준으로 구분)");
     }
 
@@ -18,10 +23,10 @@ public class GameIO {
         System.out.println("실행 결과");
     }
 
-    public void printRaceResult(Car[] car) {
-        for (int i = 0; i < car.length; i++) {
-            System.out.print(car[i].getName() + ": ");
-            drawPosition(car[i].getPosition());
+    public void printRaceResult(HashMap<String, Integer> results) {
+        for (Map.Entry<String, Integer> entry : results.entrySet()) {
+            System.out.print(entry.getKey() + ": ");
+            drawPosition(entry.getValue());
         }
         System.out.println();
     }
@@ -51,11 +56,11 @@ public class GameIO {
         System.out.print(".");
     }
 
-    public String[] inputCarNameArr(Scanner scanner) {
+    public String[] inputCarNames() {
         return scanner.nextLine().replaceAll(" ", "").split(",");
     }
 
-    public String inputTryCount(Scanner scanner) {
+    public String inputTryCount() {
         return scanner.nextLine().replaceAll(" ", "");
     }
 
@@ -71,11 +76,11 @@ public class GameIO {
     }
 
     public void catchTooLongName(String name) throws TooLongNameException {
-        if (name.length() > 5) throw new TooLongNameException();
+        if (name.length() > LONGNAME_STANDARD) throw new TooLongNameException();
     }
 
     public void catchTryCountException(String count) throws NotProperInputTypeException {
-        boolean isDigit =  count.matches("[+-]?\\d*(\\.\\d+)?");
+        boolean isDigit = count.matches("[+-]?\\d*(\\.\\d+)?");
         if (!isDigit) throw new NotProperInputTypeException();
 
     }

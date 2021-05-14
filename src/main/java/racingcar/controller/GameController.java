@@ -4,62 +4,74 @@ import racingcar.domain.Car;
 import racingcar.domain.Game;
 import racingcar.view.GameIO;
 
-import java.util.Scanner;
+import java.util.HashMap;
 
 public class GameController {
-    Scanner scanner;
     Game game;
     GameIO io;
+    String[] inputtedCarNames;
+    int inputtedTryCount;
 
     public void start() {
-        scanner = new Scanner(System.in);
-        game = new Game();
         io = new GameIO();
 
-        inputGameData();
-        generateCar(game.getCarName());
+        inputCarNames();
+        inputTryCount();
+        game = new Game(inputtedCarNames, inputtedTryCount);
         simulateRace();
     }
 
-    private void inputGameData() {
+    private void inputCarNames() {
         try {
-            io.askCarName();
-            String[] inputCarName = io.inputCarNameArr(scanner);
-            io.catchNameException(inputCarName);
-            game.setCarName(inputCarName);
+            io.askCarNames();
+            String[] carNames = io.inputCarNames();
+            io.catchNameException(carNames);
 
-            io.askTryCount();
-            String inputTryCount = io.inputTryCount(scanner);
-            io.catchTryCountException(inputTryCount);
-            game.setTryCount(Integer.parseInt(inputTryCount));
+            inputtedCarNames = carNames;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            inputGameData();
+            inputCarNames();
         }
     }
 
-    private void generateCar(String[] carName) {
-        Car[] car = new Car[carName.length];
-        for (int i = 0; i < car.length; i++) {
-            Car generatedCar = new Car(carName[i]);
-            car[i] = generatedCar;
+    private void inputTryCount() {
+        try {
+            io.askTryCount();
+            String tryCount = io.inputTryCount();
+            io.catchTryCountException(tryCount);
+
+            inputtedTryCount = Integer.parseInt(tryCount);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            inputTryCount();
         }
-        game.setCar(car);
     }
 
     private void simulateRace() {
         io.printStartingRace();
         for (int i = 0; i < game.getTryCount(); i++) {
             raceAllCarOnce();
-            io.printRaceResult(game.getCar());
+            io.printRaceResult(getRaceResultHashMap());
         }
 
-        io.printWinner(game.getWinner());
+        io.printWinner(game.getWinnerNames());
     }
 
+    ;
+
     private void raceAllCarOnce() {
-        for (Car car : game.getCar()) {
-            car.raceOnce();
+        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+        for (Car car : game.getCars()) {
+            car.raceOnce(randomNumberGenerator);
         }
+    }
+
+    private HashMap<String, Integer> getRaceResultHashMap() {
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        for (Car car : game.getCars()) {
+            hashMap.put(car.getName(), car.getPosition());
+        }
+
+        return hashMap;
     }
 }

@@ -1,28 +1,36 @@
 package racingcar.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game {
-    private Car[] car;
-    private String[] carName;
+    private List<Car> cars = new ArrayList<>();
     private int tryCount;
 
-    public Car[] getCar() {
-        return car;
+    public Game() {
     }
 
-    public String[] getCarName() {
-        return carName;
+    public Game(String[] carNames, int tryCount) {
+        for (String name : carNames) {
+            this.cars.add(new Car(name));
+        }
+        this.tryCount = tryCount;
+    }
+
+    public List<Car> getCars() {
+        return cars;
     }
 
     public int getTryCount() {
         return tryCount;
     }
 
-    public String[] getWinner() {
-        String[] winner = new String[car.length];
+    public String[] getWinnerNames() {
+        String[] winner = new String[cars.size()];
         int maxPosition = getMaxPosition();
 
-        for (int i = 0; i < car.length; i++) {
-            winner[i] = car[i].getNameIfPositionSameOrEmpty(maxPosition);
+        for (int i = 0; i < cars.size(); i++) {
+            winner[i] = cars.get(i).getNameIfPositionSameOrEmpty(maxPosition);
         }
 
         return winner;
@@ -30,22 +38,14 @@ public class Game {
 
     public int getMaxPosition() {
         int max = 0;
-        for (Car c : car) {
-            max = c.getPositionIfBiggerOrComp(max);
+        for (Car car : cars) {
+            max = Math.max(max, car.getPosition());
         }
 
         return max;
     }
 
-    public void setCar(Car[] _car) {
-        car = _car;
-    }
-
-    public void setCarName(String[] _carName) {
-        carName = _carName;
-    }
-
-    public void setTryCount(int _tryCount) {
-        tryCount = _tryCount;
+    public void setCar(List<Car> cars) {
+        this.cars = cars;
     }
 }
