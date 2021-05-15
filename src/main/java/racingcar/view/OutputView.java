@@ -7,10 +7,11 @@ public class OutputView {
         System.out.println("실행 결과");
     }
 
-    public static void raceResultView(String[] carNames, StringBuilder[] racingCars) {
-        for (int i = 0; i < carNames.length; i++) {
-            System.out.println(carNames[i] + ": " + racingCars[i].toString());
-        }
+    public static void raceResultView(String name, int position) {
+        System.out.println(name + ": " + racingLengthView(position));
+    }
+
+    public static void emptyLineView() {
         System.out.println("");
     }
 
@@ -22,5 +23,13 @@ public class OutputView {
         }
         view.append("가 최종 우승했습니다.");
         System.out.println(view.toString());
+    }
+
+    public static String racingLengthView(int position) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < position; i++) {
+            sb.append("-");
+        }
+        return sb.toString();
     }
 }

@@ -1,53 +1,22 @@
 package racingcar.controller;
 
 import racingcar.domain.Car;
-import racingcar.view.InputView;
-import racingcar.view.OutputView;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Game {
-    private static int max = 0;
-    private static ArrayList<Car> cars;
-    private static String[] carNames;
-
-    public static void main(String[] args) throws IOException {
-        InputView.carNameInputView();
-        carNames = carNameInput();
-        cars = new ArrayList<>();
-        for (int i = 0; i < carNames.length; i++) {
-            cars.add(new Car(carNames[i]));
-        }
-        int tryNumber = tryNumberInput();
-        StringBuilder[] racingCars = new StringBuilder[cars.size()];
-        racingCarsInit(racingCars);
-
-        OutputView.raceStartView();
-        for (int i = 0; i < tryNumber; i++) {
-            for (int j = 0; j < cars.size(); j++) {
-                racingCars[j] = racingCarMove(cars.get(j).move(), racingCars[j]);
-            }
-            OutputView.raceResultView(carNames, racingCars);
-        }
-        ArrayList<String> winners = getWinner();
-        OutputView.winnersView(winners);
-    }
-
-    public static ArrayList<String> getWinner() {
-        getMaxPosition();
+    public static ArrayList<String> getWinner(ArrayList<Car> cars) {
+        int max = getMaxPosition(cars);
         ArrayList<String> winners = new ArrayList<>();
         for (int i = 0; i < cars.size(); i++) {
             if (cars.get(i).getPosition() == max) {
-                winners.add(carNames[i]);
+                winners.add(cars.get(i).getName());
             }
         }
         return winners;
     }
 
-    public static void getMaxPosition() {
+    public static int getMaxPosition(ArrayList<Car> cars) {
+        int max = 0;
         int position;
         for (int i = 0; i < cars.size(); i++) {
             position = cars.get(i).getPosition();
@@ -55,63 +24,6 @@ public class Game {
                 max = position;
             }
         }
-    }
-
-    public static StringBuilder[] racingCarsInit(StringBuilder[] racingCars) {
-        for (int i = 0; i < racingCars.length; i++) {
-            racingCars[i] = new StringBuilder("");
-        }
-        return racingCars;
-    }
-
-    public static StringBuilder racingCarMove(boolean isMoving, StringBuilder racingCar) {
-        if (isMoving) {
-            racingCar.append("-");
-            return racingCar;
-        }
-        return racingCar;
-    }
-
-    public static String[] carNameInput() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String carNameInput = br.readLine();
-        String[] carNames = getCarNames(carNameInput);
-        while (!checkCarNameInput(carNames)) {
-            InputView.checkCarNameInputView();
-            carNames = getCarNames(br.readLine());
-        }
-        return carNames;
-    }
-
-    public static String[] getCarNames(String carNameInput) {
-        String[] carNames = carNameInput.split(",");
-        return carNames;
-    }
-
-    public static boolean checkCarNameInput(String[] carNames) throws IOException {
-        for(int i=0;i<carNames.length;i++){
-            if(carNames[i].length() > 5){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static int tryNumberInput() throws IOException {
-        InputView.tryNumberInputView();
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int tryNumber = Integer.parseInt(br.readLine());
-        while (!checkTryNumberInput(tryNumber)) {
-            InputView.checkTryNumberInputView();
-            tryNumber = Integer.parseInt(br.readLine());
-        }
-        return tryNumber;
-    }
-
-    public static boolean checkTryNumberInput(int tryNumber) throws IOException {
-        if (tryNumber <= 0) {
-            return false;
-        }
-        return true;
+        return max;
     }
 }
