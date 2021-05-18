@@ -1,14 +1,10 @@
 package racingcar.view;
 
-import racingcar.domain.Car;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class GameIO {
-    private final static int LONGNAME_STANDARD = 5;
-
     private Scanner scanner = new Scanner(System.in);
 
     public void askCarNames() {
@@ -62,26 +58,5 @@ public class GameIO {
 
     public String inputTryCount() {
         return scanner.nextLine().replaceAll(" ", "");
-    }
-
-    public void catchNameException(String[] name) throws EmptyNameException, TooLongNameException {
-        for (String n : name) {
-            catchEmptyName(n);
-            catchTooLongName(n);
-        }
-    }
-
-    public void catchEmptyName(String name) throws EmptyNameException {
-        if (name == "") throw new EmptyNameException();
-    }
-
-    public void catchTooLongName(String name) throws TooLongNameException {
-        if (name.length() > LONGNAME_STANDARD) throw new TooLongNameException();
-    }
-
-    public void catchTryCountException(String count) throws NotProperInputTypeException {
-        boolean isDigit = count.matches("[+-]?\\d*(\\.\\d+)?");
-        if (!isDigit) throw new NotProperInputTypeException();
-
     }
 }

@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class GameController {
     Game game;
     GameIO io;
-    String[] inputtedCarNames;
+    private String[] inputtedCarNames;
     int inputtedTryCount;
 
     public void start() {
@@ -21,11 +21,11 @@ public class GameController {
         simulateRace();
     }
 
-    private void inputCarNames() {
+    public void inputCarNames() {
         try {
             io.askCarNames();
             String[] carNames = io.inputCarNames();
-            io.catchNameException(carNames);
+            game.catchNameException(carNames);
 
             inputtedCarNames = carNames;
         } catch (Exception e) {
@@ -34,11 +34,11 @@ public class GameController {
         }
     }
 
-    private void inputTryCount() {
+    public void inputTryCount() {
         try {
             io.askTryCount();
             String tryCount = io.inputTryCount();
-            io.catchTryCountException(tryCount);
+            game.catchTryCountException(tryCount);
 
             inputtedTryCount = Integer.parseInt(tryCount);
         } catch (Exception e) {
