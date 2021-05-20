@@ -58,16 +58,11 @@ public class GameController {
         return (int) (Math.random() * 10000) % 10;
     }
 
-    public void goOrStop(Car c) {
-        if (randomValueGive() >= PROCESS_CRITERIA) {
-            c.progress();
-        }
-    }
 
     public void oneTimeplay() {
         for (Car c : arrayCars) {
-            goOrStop(c);
-            OutputView.showPlayingResult(c);
+            c.progress(randomValueGive());
+            OutputView.showPlayingResult(c.getName(), c.getPosition());
         }
     }
 
@@ -80,9 +75,9 @@ public class GameController {
         }
     }
 
-    public ArrayList<Car> decideWinner(){
+    public ArrayList<String> decideWinner(){
         int max =Integer.MIN_VALUE;
-        ArrayList<Car> winnerCars = new ArrayList<>();
+        ArrayList<String> winnerCars = new ArrayList<>();
         for(Car c : arrayCars){
             if(max < c.getPosition()){
                 max=c.getPosition();
@@ -90,7 +85,7 @@ public class GameController {
         }
         for(Car c : arrayCars){
             if(c.getPosition() == max)
-                winnerCars.add(c);
+                winnerCars.add(c.getName());
         }
         return winnerCars;
     };

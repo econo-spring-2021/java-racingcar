@@ -24,14 +24,14 @@ public class OutputView {
         System.out.println(PLAYING_RESULT_MESSAGE);
     }
 
-    public static void showPlayingResult(Car c) {
-        System.out.println(c.getName() + seperator + " " + showProgressStatus(c.getPosition()));
+    public static void showPlayingResult(String name,int position) {
+        System.out.println(name + seperator + " " + showProgressStatus(position));
     }
 
-    public static void showWinner(ArrayList<Car> cars) {
+    public static void showWinner(ArrayList<String> winnerNames) {
         StringBuilder sb = new StringBuilder();
-        for(Car c : cars)
-            sb.append(c.getName()+", ");
+        for(String s : winnerNames)
+            sb.append(s+", ");
         sb.append(WINNER_MESSAGE);
         System.out.println(sb);
     }
