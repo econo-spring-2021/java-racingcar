@@ -17,11 +17,9 @@ public class GameController {
     }
 
     public void gameStart() {
-        String carConnects;
         String[] carNames;
         do {
-            carConnects = InputView.inputNames();
-            carNames = InputView.separateName(carConnects);
+            carNames = InputView.separateName(InputView.inputNames());
         } while (checkNameLength(carNames).contains(false) || !checkIncludeCarNum(carNames));
 
         for (String s : carNames) {
