@@ -9,12 +9,7 @@ import java.util.*;
 public class GameController {
     private static final int MAX_NAME_LENGTH = 5;
     private static final int MINIMUM_INCLUDE_CAR = 2;
-    private static final int PROCESS_CRITERIA = 4;
     private ArrayList<Car> arrayCars = new ArrayList<>();
-
-    public ArrayList<Car> getArCar() {
-        return arrayCars;
-    }
 
     public void gameStart() {
         String[] carNames;
