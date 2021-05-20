@@ -10,11 +10,10 @@ public class GameController {
     private static final int MAX_NAME_LENGTH = 5;
     private static final int MINIMUM_INCLUDE_CAR = 2;
     private static final int PROCESS_CRITERIA = 4;
-    private static final String NAME_SEPARATOR = ",";
-    private ArrayList<Car> arCar = new ArrayList<>();
+    private ArrayList<Car> arrayCars = new ArrayList<>();
 
     public ArrayList<Car> getArCar() {
-        return arCar;
+        return arrayCars;
     }
 
     public void gameStart() {
@@ -22,18 +21,14 @@ public class GameController {
         String[] carNames;
         do {
             carConnects = InputView.inputNames();
-            carNames = separateName(carConnects);
+            carNames = InputView.separateName(carConnects);
         } while (checkNameLength(carNames).contains(false) || !checkIncludeCarNum(carNames));
 
         for (String s : carNames) {
-            arCar.add(new Car(s));
+            arrayCars.add(new Car(s));
         }
-        totalPlayGame();
+        totalTimePlay();
         OutputView.showWinner(decideWinner());
-    }
-
-    public String[] separateName(String names) {
-        return names.split(NAME_SEPARATOR);
     }
 
     public ArrayList<Boolean> checkNameLength(String[] carNames) {
@@ -71,18 +66,18 @@ public class GameController {
         }
     }
 
-    public void oneTimeplayGame() {
-        for (Car c : arCar) {
+    public void oneTimeplay() {
+        for (Car c : arrayCars) {
             goOrStop(c);
             OutputView.showPlayingResult(c);
         }
     }
 
-    public void totalPlayGame() {
+    public void totalTimePlay() {
         int tryCount = InputView.inputGameCount();
         OutputView.showPlayingStart();
         for (int i = 0; i < tryCount; i++) {
-            oneTimeplayGame();
+            oneTimeplay();
             System.out.println();
         }
     }
@@ -90,12 +85,12 @@ public class GameController {
     public ArrayList<Car> decideWinner(){
         int max =Integer.MIN_VALUE;
         ArrayList<Car> winnerCars = new ArrayList<>();
-        for(Car c : arCar){
+        for(Car c : arrayCars){
             if(max < c.getPosition()){
                 max=c.getPosition();
             }
         }
-        for(Car c : arCar){
+        for(Car c : arrayCars){
             if(c.getPosition() == max)
                 winnerCars.add(c);
         }
