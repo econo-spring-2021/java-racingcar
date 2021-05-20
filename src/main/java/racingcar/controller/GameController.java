@@ -11,9 +11,6 @@ public class GameController {
     private static final int MINIMUM_INCLUDE_CAR = 2;
     private static final int PROCESS_CRITERIA = 4;
     private static final String NAME_SEPARATOR = ",";
-
-    InputView inputView = new InputView();
-    OutputView outputView = new OutputView();
     private ArrayList<Car> arCar = new ArrayList<>();
 
     public ArrayList<Car> getArCar() {
@@ -24,7 +21,7 @@ public class GameController {
         String carConnects;
         String[] carNames;
         do {
-            carConnects = inputView.inputNames();
+            carConnects = InputView.inputNames();
             carNames = separateName(carConnects);
         } while (checkNameLength(carNames).contains(false) || !checkIncludeCarNum(carNames));
 
@@ -32,7 +29,7 @@ public class GameController {
             arCar.add(new Car(s));
         }
         totalPlayGame();
-        outputView.showWinner(decideWinner());
+        OutputView.showWinner(decideWinner());
     }
 
     public String[] separateName(String names) {
@@ -77,13 +74,13 @@ public class GameController {
     public void oneTimeplayGame() {
         for (Car c : arCar) {
             goOrStop(c);
-            outputView.showPlayingResult(c);
+            OutputView.showPlayingResult(c);
         }
     }
 
     public void totalPlayGame() {
-        int tryCount = inputView.inputGameCount();
-        outputView.showPlayingStart();
+        int tryCount = InputView.inputGameCount();
+        OutputView.showPlayingStart();
         for (int i = 0; i < tryCount; i++) {
             oneTimeplayGame();
             System.out.println();

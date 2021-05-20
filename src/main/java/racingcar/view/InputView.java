@@ -8,12 +8,12 @@ public class InputView {
 
     private static Scanner input = new Scanner(System.in);
 
-    public String inputNames() {
+    public static String inputNames() {
         System.out.println(INIT_MESSAGE);
         return input.nextLine().replaceAll(" ","").trim();
     }
 
-    public int inputGameCount() {
+    public static int inputGameCount() {
         System.out.println(INPUT_COUNT_MESSAGE);
         return input.nextInt();
     }
