@@ -8,5 +8,21 @@ public class Car {
         this.name = name;
     }
 
-    // 추가 기능 구현
+    public void move(int randomValue) {
+        if (randomValue >= 4) {
+            position++;
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public static int setRandomValue() {
+        return (int) ((Math.random() * 10000) % 10);
+    }
+
+    public int getPosition() {
+        return position;
+    }
 }
