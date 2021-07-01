@@ -1,7 +1,5 @@
 package racingcar.domain;
 
-import Util.RandomNumGenerator;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,9 +18,9 @@ public class Cars {
         cars.add(car);
     }
 
-    public void moveRandomAll(int bound) {
+    public void moveRandomAll(int moveMinVal, int bound) {
         for (Car car : cars) {
-            car.move(RandomNumGenerator.randInt(bound));
+            car.move();
         }
     }
 
@@ -41,7 +39,7 @@ public class Cars {
                 .getPosition();
     }
 
-    public List<String> getCarNamesPositionAt(int position) {
+    public List<String> getCarNamesAt(int position) {
         return cars.stream()
                 .filter(t -> t.getPosition() == position)
                 .map((car) -> car.getCarName())

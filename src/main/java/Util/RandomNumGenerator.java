@@ -1,7 +1,15 @@
 package Util;
 
-public final class RandomNumGenerator {
-    public final static int randInt(int bound) {
-        return (int)(Math.random() * bound);
+public class RandomNumGenerator extends NumberGenerator {
+    private int bound;
+
+    public RandomNumGenerator(int bound) {
+        super((int)(Math.random() * bound));
+        this.bound = bound;
+    }
+
+    public int getInt() {
+        super.value = (int)(Math.random() * bound);
+        return super.value;
     }
 }

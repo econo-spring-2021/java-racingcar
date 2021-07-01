@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 public class OutputView {
     public final static String CAR_SHAPE = "-";
 
-    public void showGameStartMsg() {
+    public static void showGameStartMsg() {
         System.out.println('\n' + Message.GAME_START);
     }
 
-    public void showGameProcess(Map<String, Integer> carPositions) {
+    public static void showGameProcess(Map<String, Integer> carPositions) {
         carPositions.forEach((carName, carPosition) -> {
             StringBuilder builder = new StringBuilder();
 
@@ -24,12 +24,12 @@ public class OutputView {
         System.out.println();
     }
 
-    public void showWinner(List<String> winCarNames) {
+    public static void showWinner(List<String> winCarNames) {
         System.out.println(winCarNames.stream()
                 .collect(Collectors.joining(", ")) + Message.WINNING_MESSAGE);
     }
 
-    public void showError(String msg) {
+    public static void showError(String msg) {
         System.out.println("\n" + Message.ERROR + msg + "\n");
     }
 }
