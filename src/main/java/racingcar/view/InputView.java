@@ -8,9 +8,10 @@ public class InputView {
     private static final String NAME_SEPARATOR = ",";
     private static Scanner input = new Scanner(System.in);
 
-    public static String inputNames() {
+    public static String[] inputNames() {
         System.out.println(INIT_MESSAGE);
-        return input.nextLine().replaceAll(" ","").trim();
+        String tempNames = input.nextLine().replaceAll(" ","").trim();
+        return separateName(tempNames);
     }
 
     public static String[] separateName(String names) {
