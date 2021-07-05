@@ -13,10 +13,6 @@ public class OutputView {
         System.out.println(Constants.TRY_INPUT_MESSAGE);
     }
 
-    public static void resultMessage() {
-        System.out.println(Constants.RACING_RESULT_MESSAGE);
-    }
-
     public static void showErrorMessage(String errorMessage) {
         System.out.println(errorMessage);
     }
@@ -29,10 +25,13 @@ public class OutputView {
             stringBuilder.append(Constants.CAR_SHAPE);
         }
         System.out.println(stringBuilder.toString());
-        //System.out.println();
     }
 
     public static void getWinnerMessage(List<String> winnernames) {
         System.out.println(String.join(",", winnernames + "가 최종 우승했습니다."));
+    }
+
+    public static void printRacingResultMessage() {
+        System.out.println(Constants.RACING_RESULT_MESSAGE);
     }
 }

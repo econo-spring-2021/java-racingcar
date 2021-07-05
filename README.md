@@ -45,6 +45,6 @@
 
 * Game 클래스
   - scanner = new Scanner(System.in);
-  - carFactory = new CarFactory();
+  - participatingCar = new CarFactory();
   - 생성자에서 초기화할 수 있도록 고민하기(과제 첫 풀리퀘 후)
   

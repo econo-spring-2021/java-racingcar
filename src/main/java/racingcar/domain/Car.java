@@ -22,9 +22,7 @@ public class Car {
         return position;
     }
 
-    public void move(Random random) {
-        if(random.nextInt(10) >= Constants.MOVE_FORWARD_CONDITION) {
-            position++;
-        }
+    public void move() {
+        position++;
     }
 }

@@ -1,8 +1,7 @@
 package racingcar.controller;
 
 import racingcar.domain.Car;
-import racingcar.domain.CarFactory;
-import racingcar.view.Constants;
+import racingcar.domain.ParticipatingCar;
 import racingcar.view.InputView;
 import racingcar.view.InputViewException;
 import racingcar.view.OutputView;
@@ -12,7 +11,7 @@ import java.util.Scanner;
 public class Game {
     private Scanner scanner;
     private InputView inputView;
-    private CarFactory carFactory;
+    private ParticipatingCar participatingCar;
     private Race race;
 
     public Game() {
@@ -23,7 +22,7 @@ public class Game {
     public void play() {
         try {
             scanner = new Scanner(System.in);
-            carFactory = new CarFactory();
+            participatingCar = new ParticipatingCar();
             inputView.inputCarNames(scanner);
             String[] carName = inputView.getCarNames();
             inputView.inputTryCount(scanner);
@@ -31,11 +30,11 @@ public class Game {
 
             for (int indexOfCars = 0; indexOfCars < carName.length; indexOfCars++) { // 레이싱 경기에 참여하는 출전 자동차들
                 Car car = new Car(carName[indexOfCars]);
-                carFactory.addRacingCar(car);
+                participatingCar.addRacingCar(car);
             }
 
-            race.race(carFactory, trial);
-            Winner.getWinner(carFactory.getRacingCarList());
+            race.race(participatingCar, trial);
+            race.getWinner(participatingCar.getRacingCarList());
 
         } catch(InputViewException e) {
             OutputView.showErrorMessage(e.getMessage());

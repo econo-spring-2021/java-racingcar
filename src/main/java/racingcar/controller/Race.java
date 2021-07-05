@@ -1,13 +1,15 @@
 package racingcar.controller;
 
 import racingcar.domain.Car;
-import racingcar.domain.CarFactory;
+import racingcar.domain.ParticipatingCar;
 import racingcar.view.Constants;
 import racingcar.view.OutputView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Race {
     private List<Car> racingCarList;
@@ -20,11 +22,11 @@ public class Race {
         this.trial = 0;
     }
 
-    public void race(CarFactory carFactory, int trial) {
-        racingCarList = carFactory.getRacingCarList();
+    public void race(ParticipatingCar participatingCar, int trial) {
+        racingCarList = participatingCar.getRacingCarList();
         this.trial = trial;
 
-        System.out.println(Constants.RACING_RESULT_MESSAGE);
+        OutputView.printRacingResultMessage();
         for(int count = 0; count < trial; count++) {
             startOneRound(racingCarList);
             System.out.println();
@@ -33,11 +35,43 @@ public class Race {
 
     private void startOneRound(List<Car> racingCarList) {
         for(Car car: racingCarList) {
-            car.move(random);
+            raceOneCarbyOneRound(car);
         }
 
         for(Car car: racingCarList) {
             OutputView.showOneRoundResultByOneCar(car.getName(), car.getPosition());
         }
+    }
+
+    private void raceOneCarbyOneRound(Car car) {
+        if(judgeMovingCondition()) {
+            car.move();
+        }
+    }
+
+    private boolean judgeMovingCondition() {
+        if(random.nextInt(10) >= Constants.MOVE_FORWARD_CONDITION) {
+            return true;
+        }
+        return false;
+    }
+
+    public void getWinner(List<Car> racingCarList) {
+        List<Car> winner = new ArrayList<>();
+        int positionOfWinner = findPositionOfWinner(racingCarList);
+        winner = racingCarList.stream().filter(car -> (car.getPosition() == positionOfWinner)).collect(Collectors.toList());
+        List<String> winnernames = new ArrayList<>();
+        for(int i = 0; i < winner.size(); i++){
+            winnernames.add(winner.get(i).getName());
+        }
+        OutputView.getWinnerMessage(winnernames);
+    }
+
+    private int findPositionOfWinner(List<Car> racingCarList) {
+        List<Integer> position = new ArrayList<>();
+        for(Car car: racingCarList){
+            position.add(car.getPosition());
+        }
+        return Collections.max(position);
     }
 }

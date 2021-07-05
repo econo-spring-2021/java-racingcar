@@ -3,10 +3,10 @@ package racingcar.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarFactory {
+public class ParticipatingCar {
     private List<Car> racingCarList;
 
-    public CarFactory() {
+    public ParticipatingCar() {
         racingCarList = new ArrayList<>();
     }
 
