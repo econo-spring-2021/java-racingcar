@@ -1,6 +1,6 @@
 package racingcar.domain;
 
-import Util.NumberGenerator;
+import Util.DedicatedNumberGenerator;
 import org.junit.jupiter.api.Test;
 import racingcar.exception.CarNameException;
 import racingcar.view.OutputView;
@@ -13,7 +13,7 @@ class CarTest {
         try {
             Car car;
             for (int i = 4; i < 10; i++) {
-                car = new Car("Fry", new NumberGenerator(i));
+                car = new Car("Fry", new DedicatedNumberGenerator(i));
                 car.move();
                 assertThat(car.getPosition()).isEqualTo(1);
             }
@@ -27,7 +27,7 @@ class CarTest {
         try {
             Car car;
             for (int i = 1; i < 4; i++) {
-                car = new Car("Fry", new NumberGenerator(i));
+                car = new Car("Fry", new DedicatedNumberGenerator(i));
                 car.move();
                 assertThat(car.getPosition()).isEqualTo(0);
             }

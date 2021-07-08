@@ -1,7 +1,6 @@
 package racingcar.domain;
 
 import Util.NumberGenerator;
-import Util.RandomNumGenerator;
 import racingcar.exception.CarNameException;
 
 public class Car implements Comparable<Car> {

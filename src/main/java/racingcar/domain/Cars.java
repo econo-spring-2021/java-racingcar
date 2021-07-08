@@ -18,7 +18,7 @@ public class Cars {
         cars.add(car);
     }
 
-    public void moveRandomAll(int moveMinVal, int bound) {
+    public void moveRandomAll() {
         for (Car car : cars) {
             car.move();
         }

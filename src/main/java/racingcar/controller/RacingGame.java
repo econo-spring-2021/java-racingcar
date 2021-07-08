@@ -1,5 +1,6 @@
 package racingcar.controller;
 
+import Util.DedicatedNumberGenerator;
 import Util.NumberGenerator;
 import Util.RandomNumGenerator;
 import racingcar.domain.Car;
@@ -12,7 +13,6 @@ import java.util.Map;
 
 class RacingGame {
     private final static int RAND_VAL_BOUND = 10;
-    public final static int CAN_MOVE_MIN_VAL = 4;
 
     private int maxTrial;
     private boolean status;
@@ -43,7 +43,7 @@ class RacingGame {
 
     public void startRound() {
         if (!status) return;
-        racingCars.moveRandomAll(RAND_VAL_BOUND, CAN_MOVE_MIN_VAL);
+        racingCars.moveRandomAll();
         trialTime += 1;
         if (trialTime >= maxTrial) status = false;
     }

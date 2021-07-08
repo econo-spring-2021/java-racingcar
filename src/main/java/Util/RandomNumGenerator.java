@@ -1,15 +1,16 @@
 package Util;
 
-public class RandomNumGenerator extends NumberGenerator {
+public class RandomNumGenerator implements NumberGenerator {
+    private int value;
     private int bound;
 
     public RandomNumGenerator(int bound) {
-        super((int)(Math.random() * bound));
+        this.value = (int)(Math.random() * bound);
         this.bound = bound;
     }
 
     public int getInt() {
-        super.value = (int)(Math.random() * bound);
-        return super.value;
+        this.value = (int)(Math.random() * bound);
+        return this.value;
     }
 }
