@@ -1,27 +1,34 @@
 package racingcar.view;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
+    private Scanner scanner;
     private String carNames;
-    private String[] carName;
+    private List<String> carName;
     private int count;
 
-    public void inputCarNames(Scanner scanner) throws InputViewException {
+    public InputView() {
+        scanner = new Scanner(System.in);
+    }
+
+    public void inputCarNames() throws InputViewException {
         OutputView.inputCarNameMessage();
         carNames = scanner.nextLine();
         carName = splitCommaFromStringInput(carNames);
-        for(int indexOfCars = 0; indexOfCars < carName.length; indexOfCars++) {
-            checkNamingRule(carName[indexOfCars]);
+        for(int indexOfCars = 0; indexOfCars < carName.size(); indexOfCars++) {
+            checkNamingRule(carName.get(indexOfCars));
         }
     }
 
-    public void inputTryCount(Scanner scanner) {
+    public void inputTryCount() {
         OutputView.inputTryCountMessage();
         count = scanner.nextInt();
     }
 
-    public String[] getCarNames() {
+    public List<String> getCarNames() {
         return this.carName;
     }
 
@@ -29,8 +36,8 @@ public class InputView {
         return this.count;
     }
 
-    private String[] splitCommaFromStringInput(String carNames) {
-        String[] carName = carNames.split(",");
+    private List<String> splitCommaFromStringInput(String carNames) {
+        List<String> carName = Arrays.asList(carNames.split(","));
         return carName;
     }
 

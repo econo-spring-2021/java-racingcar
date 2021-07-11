@@ -22,7 +22,7 @@ public class Race {
         this.trial = 0;
     }
 
-    public void race(ParticipatingCar participatingCar, int trial) {
+    public void start(ParticipatingCar participatingCar, int trial) {
         racingCarList = participatingCar.getRacingCarList();
         this.trial = trial;
 
@@ -44,12 +44,12 @@ public class Race {
     }
 
     private void raceOneCarbyOneRound(Car car) {
-        if(judgeMovingCondition()) {
+        if(isMovingCondition()) {
             car.move();
         }
     }
 
-    private boolean judgeMovingCondition() {
+    private boolean isMovingCondition() {
         if(random.nextInt(10) >= Constants.MOVE_FORWARD_CONDITION) {
             return true;
         }
@@ -59,7 +59,9 @@ public class Race {
     public void getWinner(List<Car> racingCarList) {
         List<Car> winner = new ArrayList<>();
         int positionOfWinner = findPositionOfWinner(racingCarList);
-        winner = racingCarList.stream().filter(car -> (car.getPosition() == positionOfWinner)).collect(Collectors.toList());
+        winner = racingCarList.stream()
+                .filter(car -> (car.getPosition() == positionOfWinner))
+                .collect(Collectors.toList());
         List<String> winnernames = new ArrayList<>();
         for(int i = 0; i < winner.size(); i++){
             winnernames.add(winner.get(i).getName());

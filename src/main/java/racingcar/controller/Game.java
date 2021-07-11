@@ -6,10 +6,10 @@ import racingcar.view.InputView;
 import racingcar.view.InputViewException;
 import racingcar.view.OutputView;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Game {
-    private Scanner scanner;
     private InputView inputView;
     private ParticipatingCar participatingCar;
     private Race race;
@@ -21,19 +21,18 @@ public class Game {
 
     public void play() {
         try {
-            scanner = new Scanner(System.in);
             participatingCar = new ParticipatingCar();
-            inputView.inputCarNames(scanner);
-            String[] carName = inputView.getCarNames();
-            inputView.inputTryCount(scanner);
+            inputView.inputCarNames();
+            List<String> carName = inputView.getCarNames();
+            inputView.inputTryCount();
             int trial = inputView.getCount();
 
-            for (int indexOfCars = 0; indexOfCars < carName.length; indexOfCars++) { // 레이싱 경기에 참여하는 출전 자동차들
-                Car car = new Car(carName[indexOfCars]);
-                participatingCar.addRacingCar(car);
+            for (int indexOfCars = 0; indexOfCars < carName.size(); indexOfCars++) { // 레이싱 경기에 참여하는 출전 자동차들
+                Car car = new Car(carName.get(indexOfCars));
+                participatingCar.register(car);
             }
 
-            race.race(participatingCar, trial);
+            race.start(participatingCar, trial);
             race.getWinner(participatingCar.getRacingCarList());
 
         } catch(InputViewException e) {

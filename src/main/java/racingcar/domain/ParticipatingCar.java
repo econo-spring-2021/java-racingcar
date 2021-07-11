@@ -10,7 +10,7 @@ public class ParticipatingCar {
         racingCarList = new ArrayList<>();
     }
 
-    public void addRacingCar(Car car) {
+    public void register(Car car) {
         racingCarList.add(car);
     }
 
