@@ -1,15 +1,15 @@
 package racingcar.controller;
 
+import racingcar.view.RacingView;
+
 import java.util.Random;
 
 public class Controller {
-    public int generateNumber(){
-        int randomNumber = (int)(Math.random()*10);
-        System.out.println(randomNumber);
-        return randomNumber;
-    }
 
-    int randomNumber=0;
+    RacingView racingView = new RacingView();
+
+
+    int randomNumber= racingView.generateRandomNumber();
 
     public String judgeNumber(int randomNumber){
         if (randomNumber >= 4){
