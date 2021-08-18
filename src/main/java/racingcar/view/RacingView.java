@@ -2,68 +2,65 @@ package racingcar.view;
 
 import racingcar.controller.Controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
+import static racingcar.controller.Controller.getCarObjects;
+
 public class RacingView {
+    private static int racingCarCount;
+    static List<String> racingCars = new ArrayList<String>();
+    // public static Object[] cars;
 
-    Scanner scanner = new Scanner(System.in);
+    private static int tryNumber;
 
-    // 경주할 자동차
-    public String[] racingCars = new String[10];
+    public static void main(){
+        Scanner scanner = new Scanner(System.in);
 
-
-    int racingCarCount = 0;
-
-    // 경주 자동차 입력
-    public void inputNames(){
-        System.out.println("경주할 자동차 이름을 입력하세요. 이름은 5자 이하만 가능합니다. (이름은 쉼표(,) 기준으로 구분)");
+        // 경주할 자동차 입력
+        System.out.println("경주할 자동차 이름을 입력하세요. 이름은 5자 이하만 가능합니다. (이름은 쉼표(,) 기준으로 구분됩니다.)");
         String carNames = scanner.nextLine();
         String[] Cars = carNames.split(", ");
 
-        for(int i = 0; i <Cars.length; i++){
+        // 입력한 자동차 검사
+        for (int i = 0; i <Cars.length; i++){
             String carName = Cars[i];
             checkName(carName);
         }
 
-        System.out.println(Arrays.toString(Cars));
+        // 경주 시도 횟수 입력하기
+        System.out.println("시도할 회수는 몇 회인가요?");
+        tryNumber = scanner.nextInt();
     }
 
-    // 자동차 이름 재입력
-    public void tryInputName(){
-        String carName = scanner.nextLine();
-        checkName(carName);
-    }
-
-    // 자동차 이름 글자 수
-    public void checkName(String carName){
+    public static void checkName(String carName){
         if (carName.length() > 5){
             System.out.println(carName + " : 은 5글자 이상입니다. 다시 입력하세요.");
             tryInputName();
         }
-        if (carName.length() <= 5){
-            System.out.println(carName +" : 경주 차량으로 등록 완료되었습니다. ");
-            racingCars[racingCarCount] = carName;
-            racingCarCount+= 1;
+        if (carName.length()<=5){
+            // racingCars[racingCarCount] = carName;
+            // racingCarCount = 0;
+            racingCars.add(racingCarCount, carName);
+            racingCarCount+=1;
+            System.out.println(carName+"경주 차량 등록 완료되었습니다. ");
         }
     }
 
-    public void printResult(){
-        System.out.println(Arrays.toString(racingCars));
+    public static void tryInputName(){
+        Scanner scanner = new Scanner(System.in);
+        String carName = scanner.nextLine();
+        checkName(carName);
+    }
+
+    public static List<String> getRacingCars() {
+        return racingCars;
     }
 
 
-
-    // 경주 시도 횟수 입력
-    public void inputTryNumber (){
-        System.out.println("시도할 횟수는 몇 회인가요?");
-        Integer tryNumber = scanner.nextInt();
-    }
-
-    // 랜덤한 숫자 출력
-    public int generateRandomNumber(){
-        int randomNumber = (int)(Math.random()*10);
-        System.out.println(randomNumber);
-        return randomNumber;
+    public static int getTryNumber(){
+        return tryNumber;
     }
 }
