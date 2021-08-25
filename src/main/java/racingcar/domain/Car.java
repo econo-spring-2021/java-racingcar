@@ -2,16 +2,29 @@ package racingcar.domain;
 
 public class Car {
 
-    // 자동차 이름
     public String carName;
-    // 랜덤으로 생성된 숫자
-    public int randomNumber;
-    // 자동차가 주행한 거리
+    public int movement;
     public int distance;
 
-    public Car() {
-        String carName;
-        int randomNumber;
-        int distance;
+    public Car(String name, int number, int d) {
+        carName = name;
+        movement = number;
+        distance = d;
+    }
+
+    public String getCarName(){
+        return carName;
+    }
+
+    public void setCarMovement(int number){
+        movement = number;
+    }
+
+    public void setCarDistance(int d){
+        distance = d;
+    }
+
+    public int getCarDistance(){
+        return distance;
     }
 }
