@@ -1,9 +1,5 @@
 package racingcar.view;
 
-
-import racingcar.domain.Car;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -71,7 +67,6 @@ public class RacingView {
         String stringWinner = String.join(", ", winners);
         System.out.println(stringWinner+"가 최종 우승했습니다.");
     }
-
 
     public ArrayList<String> getRacingCars(){
         return racingCars;

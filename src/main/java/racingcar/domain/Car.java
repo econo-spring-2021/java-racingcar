@@ -20,8 +20,6 @@ public class Car {
         movement = number;
     }
 
-    public int getCarMovement(){return movement;}
-
     public void setCarDistance(int d){
         distance = d;
     }

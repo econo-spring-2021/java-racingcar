@@ -2,10 +2,7 @@ package racingcar.controller;
 
 import racingcar.domain.Car;
 import racingcar.view.RacingView;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class RacingController{
     RacingView racingView = new RacingView();
@@ -14,7 +11,6 @@ public class RacingController{
     ArrayList<Car> carObject = new ArrayList<Car>();
 
     ArrayList<String> winners = new ArrayList<String>();
-
 
     int tryNumber;
     public int randomNumber;
