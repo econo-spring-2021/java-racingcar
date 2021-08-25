@@ -3,6 +3,7 @@ package racingcar.view;
 
 import racingcar.domain.Car;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -43,18 +44,34 @@ public class RacingView {
         checkName(carName);
     }
 
-    /*
-    public void printRacingBroadCast(){
-        for (Car item:carObject){
-            System.out.println(String.format("자동차 이름: %s, 움직일 거리: %d, 이동거리: %d", item.carName, item.movement, item.distance));
+    public void printGameResult(){
+        System.out.println("실행 결과");
+    }
+
+    public void printBlankLine(){
+        System.out.println("");
+    }
+
+    public void printRacingBroadCast(String carName, int distance){
+        System.out.println(String.format("%s: %s", carName, printDistance(distance)));
+    }
+
+    public String printDistance(int distance){
+        ArrayList<String> stringArrayList = new ArrayList<String>();
+
+        for (int i=0; i < distance; i++){
+            stringArrayList.add("-");
         }
+
+        String stringDistance = String.join("", stringArrayList);
+        return stringDistance;
     }
 
-    public void printRacingWinner(){
-        System.out.println(winners);
+    public void printRacingWinner(ArrayList winners){
+        String stringWinner = String.join(", ", winners);
+        System.out.println(stringWinner+"가 최종 우승했습니다.");
     }
 
-     */
 
     public ArrayList<String> getRacingCars(){
         return racingCars;
