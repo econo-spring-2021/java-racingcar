@@ -1,48 +1,52 @@
 package racingcar.controller;
 
 import racingcar.domain.Car;
+import racingcar.view.PrintView;
 import racingcar.view.RacingView;
 import java.util.ArrayList;
 
 public class RacingController{
+    private static final int MAXIMUM_CAR_LENGTH = 5;
+
     RacingView racingView = new RacingView();
+    PrintView printView = new PrintView();
 
     ArrayList<String> racingCars;
     ArrayList<Car> carObject = new ArrayList<Car>();
 
     ArrayList<String> winners = new ArrayList<String>();
 
+
     int tryNumber;
     public int randomNumber;
 
     public void startGame(){
-        racingView.inputRacingCar();
+        racingView.inputCarNames();
+        racingView.inputTryNumber();
 
         racingCars = racingView.getRacingCars();
         tryNumber = racingView.getTryNumber();
 
         assignCars();
-
         startRacing();
 
-        racingView.printBlankLine();
-        racingView.printRacingWinner(winners);
+        printView.printRacingWinner(winners);
     }
 
     private void assignCars(){
         for (int i=0; i < racingCars.size(); i++){
             String carName = racingCars.get(i);
 
-            carObject.add(new Car(carName, 0, 0));
+            carObject.add(new Car(carName, 0));
         }
     }
 
     public void startRacing(){
-        racingView.printGameResult();
+        printView.printGameResult();
+        System.out.println(tryNumber);
 
         for (int i = 0; i < tryNumber; i++){
             startOneRound();
-
         }
         findWinner();
     }
@@ -52,19 +56,22 @@ public class RacingController{
         String name;
         int d;
 
-        racingView.printBlankLine();
+        printView.printBlankLine();
 
         for (int i = 0; i < racingCars.size(); i++){
-            int movement = judgeRandomNumber(generateRandomNumber());
-            int distance = carObject.get(i).getCarDistance();
-            int totalDistance = movement + distance;
-            carObject.get(i).setCarMovement(movement);
-            carObject.get(i).setCarDistance(totalDistance);
+            int randomNumber = generateRandomNumber();
+            judgeMovement(randomNumber, i);
 
             name = carObject.get(i).getCarName();
             d = carObject.get(i).getCarDistance();
 
-            racingView.printRacingBroadCast(name, d);
+            printView.printRacingBroadCast(name, d);
+        }
+    }
+
+    public void judgeMovement(int number, int i){
+        if (number > MAXIMUM_CAR_LENGTH){
+            carObject.get(i).moveCar();
         }
     }
 
@@ -107,17 +114,5 @@ public class RacingController{
         randomNumber = (int) (Math.random()*10);
 
         return randomNumber;
-    }
-
-    private int judgeRandomNumber(int randomNumber){
-        int movement = 0;
-
-        if (randomNumber >=4){
-            movement = 1;
-        }
-        if (randomNumber < 4){
-            movement = 0;
-        }
-        return movement;
     }
 }
