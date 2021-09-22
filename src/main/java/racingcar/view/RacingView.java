@@ -25,18 +25,18 @@ public class RacingView {
         }
     }
 
-    public void checkNameException(String[] names){
+    private void checkNameException(String[] names){
         for (int i = 0; i < names.length; i++){
             checkEmptyName(names[i]);
             checkLongLengthName(names[i]);
         }
     }
 
-    public void askCarNames(){
+    private void askCarNames(){
         System.out.println("경주할 자동차 이름을 입력합니다. 이름은 5자 이하만 가능합니다. (이름은 쉼표(,) 기준으로 구분됩니다.)");
     }
 
-    public void askTryNumber(){
+    private void askTryNumber(){
         System.out.println("시도할 횟수는 몇 번인가요?");
     }
 
@@ -56,14 +56,14 @@ public class RacingView {
         }
     }
 
-    public void checkEmptyName(String name){
+    private void checkEmptyName(String name){
         if (name==""){
             System.out.println("이름이 공백입니다. 다시 작성해주세요.");
             tryInputName();
         }
     }
 
-    public void checkLongLengthName(String name){
+    private void checkLongLengthName(String name){
         if (name.length() > MAXIMUM_CAR_LENGTH){
             System.out.println(name+ " : 은 5글자 이상입니다. 다시 입력하세요.");
             tryInputName();

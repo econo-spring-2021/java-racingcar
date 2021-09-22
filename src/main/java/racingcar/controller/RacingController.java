@@ -41,7 +41,7 @@ public class RacingController{
         }
     }
 
-    public void startRacing(){
+    private void startRacing(){
         printView.printGameResult();
         System.out.println(tryNumber);
 
@@ -51,31 +51,22 @@ public class RacingController{
         findWinner();
     }
 
-    public void startOneRound(){
-
-        String name;
-        int d;
-
-        printView.printBlankLine();
-
+    private void startOneRound(){
         for (int i = 0; i < racingCars.size(); i++){
             int randomNumber = generateRandomNumber();
             judgeMovement(randomNumber, i);
-
-            name = carObject.get(i).getCarName();
-            d = carObject.get(i).getCarDistance();
-
-            printView.printRacingBroadCast(name, d);
         }
+
+        printView.printRacingResult(carObject);
     }
 
-    public void judgeMovement(int number, int i){
+    private void judgeMovement(int number, int i){
         if (number > MAXIMUM_CAR_LENGTH){
             carObject.get(i).moveCar();
         }
     }
 
-    public ArrayList<String> findWinner(){
+    private ArrayList<String> findWinner(){
         int maxDistance = carObject.get(0).getCarDistance();
 
         winners.add(carObject.get(0).getCarName());
@@ -98,7 +89,7 @@ public class RacingController{
         return winners;
     }
 
-    public ArrayList<String> duplicateCheck(ArrayList<String> arrayList){
+    private ArrayList<String> duplicateCheck(ArrayList<String> arrayList){
         ArrayList<String> resultList = new ArrayList<String>();
 
         for (int i = 0; i < arrayList.size(); i++){

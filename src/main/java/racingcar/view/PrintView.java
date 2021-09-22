@@ -1,5 +1,7 @@
 package racingcar.view;
 
+import racingcar.domain.Car;
+
 import java.util.ArrayList;
 
 public class PrintView {
@@ -7,12 +9,17 @@ public class PrintView {
         System.out.println("실행 결과");
     }
 
-    public void printBlankLine(){
-        System.out.println("");
-    }
+    public void printRacingResult(ArrayList<Car> carArrayList){
+        String name;
+        int d;
 
-    public void printRacingBroadCast(String carName, int distance){
-        System.out.println(String.format("%s: %s", carName, printDistance(distance)));
+        for (int i = 0; i < carArrayList.size(); i ++){
+            name = carArrayList.get(i).getCarName();
+            d = carArrayList.get(i).getCarDistance();
+            System.out.println(String.format("%s: %s", name, printDistance(d)));
+        }
+
+        System.out.println("");
     }
 
     public String printDistance(int distance){
