@@ -1,12 +1,23 @@
 package racingcar.domain;
 
 public class Car {
-    private final String name;
-    private int position = 0;
+    public String carName;
+    public int distance;
 
-    public Car(String name) {
-        this.name = name;
+    public Car(String name, int d) {
+        carName = name;
+        distance = d;
     }
 
-    // 추가 기능 구현
+    public void moveCar(){
+        distance++;
+    }
+
+    public String getCarName(){
+        return carName;
+    }
+
+    public int getCarDistance(){
+        return distance;
+    }
 }
